@@ -3,80 +3,641 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>bring4U — Demo Site</title>
+  <title>bring4U — 日本形象サイト</title>
   <style>
     :root {
       --bg: #fdfaf6;
       --ink: #1f1b16;
       --accent: #b91c1c;
+      --accent-light: #fee2e2;
       --muted: #8a7f74;
+      --border: #ece4d7;
+      --card-bg: #ffffff;
+      --section-bg: #faf6f0;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
-      height: 100%;
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
       font-family: "Hiragino Sans", "Yu Gothic", "Helvetica Neue", Arial, sans-serif;
       background: var(--bg);
       color: var(--ink);
       -webkit-font-smoothing: antialiased;
+      line-height: 1.7;
     }
-    body {
+
+    /* ── HEADER / HERO ── */
+    header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 56px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 24px;
+      justify-content: space-between;
     }
-    .card {
-      max-width: 560px;
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    nav a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 20px;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
       text-align: center;
-      padding: 48px 32px;
-      border: 1px solid #ece4d7;
-      border-radius: 12px;
-      background: #ffffff;
-      box-shadow: 0 8px 30px rgba(31, 27, 22, 0.05);
+      padding: 80px 24px 60px;
+      background: linear-gradient(160deg, #fff7f0 0%, var(--bg) 100%);
     }
-    .badge {
+
+    .hero .badge {
       display: inline-block;
-      font-size: 12px;
-      letter-spacing: 0.2em;
+      font-size: 11px;
+      letter-spacing: 0.25em;
       color: var(--accent);
       text-transform: uppercase;
-      margin-bottom: 16px;
+      border: 1px solid var(--accent);
+      padding: 3px 12px;
+      border-radius: 999px;
+      margin-bottom: 20px;
     }
-    h1 {
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      line-height: 1.35;
+      margin-bottom: 14px;
+      color: var(--ink);
+    }
+
+    .hero h1 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION COMMON ── */
+    section {
+      padding: 64px 24px;
+    }
+
+    section:nth-child(even) {
+      background: var(--section-bg);
+    }
+
+    .section-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 32px;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 12px;
+      display: inline-block;
+    }
+
+    /* ── 会社概要 ── */
+    .company-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .company-row {
+      display: contents;
+    }
+
+    .company-key {
+      background: var(--section-bg);
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .company-val {
+      background: var(--card-bg);
+      padding: 14px 20px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .company-key:last-of-type,
+    .company-val:last-of-type {
+      border-bottom: none;
+    }
+
+    /* ── 発展理念 ── */
+    .philosophy-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .philosophy-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .philosophy-card .icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .philosophy-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .philosophy-card p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── 公告案内 ── */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .news-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 24px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .news-item:last-child { border-bottom: none; }
+    .news-item:hover { background: #fff9f5; }
+
+    .news-date {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 2px;
+      min-width: 96px;
+    }
+
+    .news-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-light);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .news-title {
+      font-size: 14px;
+      flex: 1;
+    }
+
+    /* ── 網站連結 ── */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .link-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 20px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+
+    .link-card:hover {
+      box-shadow: 0 6px 20px rgba(185, 28, 28, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .link-card .link-icon {
       font-size: 28px;
-      line-height: 1.4;
+    }
+
+    .link-card .link-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .link-card .link-desc {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── 採用情報 ── */
+    .jobs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .job-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .job-info h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .job-info p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .job-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .job-tag {
+      font-size: 11px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .btn {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 22px;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover { background: var(--accent-light); opacity: 1; }
+
+    /* ── 合作洽談 ── */
+    .contact-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-box h3 {
+      font-size: 20px;
+      font-weight: 700;
       margin-bottom: 12px;
     }
-    h1 .jp { color: var(--accent); }
-    p {
+
+    .contact-box p {
+      font-size: 14px;
       color: var(--muted);
-      font-size: 15px;
-      line-height: 1.7;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
-    .meta {
-      font-size: 12px;
-      color: var(--muted);
-      border-top: 1px solid #ece4d7;
-      padding-top: 16px;
+
+    .contact-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-    .meta code {
-      background: #f5efe5;
-      padding: 2px 6px;
-      border-radius: 4px;
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: #c9bfb5;
+      text-align: center;
+      padding: 32px 24px;
       font-size: 12px;
+    }
+
+    footer .footer-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { display: none; }
+
+      .company-grid {
+        grid-template-columns: 1fr;
+      }
+      .company-key {
+        border-bottom: none;
+        padding-bottom: 4px;
+      }
+      .company-val {
+        padding-top: 4px;
+      }
+
+      .job-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .contact-box {
+        padding: 32px 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="card">
-    <div class="badge">bring4U</div>
-    <h1>Hello, <span class="jp">日本</span>.</h1>
-    <p>これはデモサイトです。<br />
-    Bitbucket → Vercel 自動デプロイのテストページ。</p>
-    <div class="meta">
-      Deployed via <code>Vercel</code> · Source on <code>Bitbucket</code>
+
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="nav-inner">
+      <a class="logo" href="#">bring4U</a>
+      <nav>
+        <a href="#about">会社概要</a>
+        <a href="#philosophy">理念</a>
+        <a href="#news">公告</a>
+        <a href="#links">サイト</a>
+        <a href="#jobs">採用</a>
+        <a href="#contact">提携</a>
+      </nav>
     </div>
-  </main>
+  </header>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="badge">bring4U Inc.</div>
+    <h1>Hello, <em>日本</em>.</h1>
+    <p>台湾発のビジネスソリューションで、日本市場との架け橋を担います。</p>
+  </div>
+
+  <!-- ── 会社概要 ── -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label">About Us</div>
+      <h2 class="section-title">会社概要</h2>
+      <div class="company-grid">
+        <div class="company-key">会社名</div>
+        <div class="company-val">bring4U 股份有限公司</div>
+
+        <div class="company-key">設立</div>
+        <div class="company-val">2022年</div>
+
+        <div class="company-key">所在地</div>
+        <div class="company-val">台湾・台北市</div>
+
+        <div class="company-key">事業内容</div>
+        <div class="company-val">日台ビジネスマッチング・越境EC支援・マーケティング</div>
+
+        <div class="company-key">代表メール</div>
+        <div class="company-val">sales@bring4u.tw</div>
+
+        <div class="company-key">ウェブサイト</div>
+        <div class="company-val">bring4u.tw</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 発展理念 ── -->
+  <section id="philosophy">
+    <div class="section-inner">
+      <div class="section-label">Our Values</div>
+      <h2 class="section-title">発展理念</h2>
+      <div class="philosophy-cards">
+        <div class="philosophy-card">
+          <span class="icon">🤝</span>
+          <h3>信頼と誠実</h3>
+          <p>パートナーとの長期的な信頼関係を最優先に、誠実なビジネスを追求します。</p>
+        </div>
+        <div class="philosophy-card">
+          <span class="icon">🌏</span>
+          <h3>越境・架け橋</h3>
+          <p>台湾と日本の文化・商慣習を深く理解し、両者をつなぐ存在であり続けます。</p>
+        </div>
+        <div class="philosophy-card">
+          <span class="icon">💡</span>
+          <h3>革新と成長</h3>
+          <p>常に新しい視点と技術でビジネスの可能性を広げ、共に成長を目指します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 公告案内 ── -->
+  <section id="news">
+    <div class="section-inner">
+      <div class="section-label">News &amp; Announcements</div>
+      <h2 class="section-title">公告案内</h2>
+      <div class="news-list">
+        <div class="news-item">
+          <span class="news-date">2026.05.01</span>
+          <span class="news-tag">お知らせ</span>
+          <span class="news-title">日本向け形象サイトを正式公開しました。</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2026.04.15</span>
+          <span class="news-tag">採用</span>
+          <span class="news-title">2026年度・日台ビジネスコーディネーター職の募集を開始しました。</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2026.03.20</span>
+          <span class="news-tag">提携</span>
+          <span class="news-title">東京にてビジネスマッチングイベントを開催します（詳細は追って公開）。</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2026.02.01</span>
+          <span class="news-tag">お知らせ</span>
+          <span class="news-title">越境EC支援サービスのプランを刷新しました。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 網站連結 ── -->
+  <section id="links">
+    <div class="section-inner">
+      <div class="section-label">Site Links</div>
+      <h2 class="section-title">ネットワーク</h2>
+      <div class="links-grid">
+        <a class="link-card" href="#">
+          <span class="link-icon">🏠</span>
+          <span class="link-name">公式サイト</span>
+          <span class="link-desc">bring4u.tw</span>
+        </a>
+        <a class="link-card" href="#">
+          <span class="link-icon">🛒</span>
+          <span class="link-name">ECサービス</span>
+          <span class="link-desc">越境EC支援ポータル</span>
+        </a>
+        <a class="link-card" href="#">
+          <span class="link-icon">📰</span>
+          <span class="link-name">メディア</span>
+          <span class="link-desc">日台ビジネスメディア</span>
+        </a>
+        <a class="link-card" href="#">
+          <span class="link-icon">📸</span>
+          <span class="link-name">Instagram</span>
+          <span class="link-desc">最新情報をフォロー</span>
+        </a>
+        <a class="link-card" href="#">
+          <span class="link-icon">💼</span>
+          <span class="link-name">LinkedIn</span>
+          <span class="link-desc">ビジネスネットワーク</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 採用情報 ── -->
+  <section id="jobs">
+    <div class="section-inner">
+      <div class="section-label">Careers</div>
+      <h2 class="section-title">採用情報</h2>
+      <div class="jobs-list">
+        <div class="job-card">
+          <div class="job-info">
+            <h3>日台ビジネスコーディネーター</h3>
+            <p>日本企業と台湾パートナーをつなぐ窓口として活躍いただきます。</p>
+            <div class="job-tags">
+              <span class="job-tag">正社員</span>
+              <span class="job-tag">台北勤務</span>
+              <span class="job-tag">日本語必須</span>
+            </div>
+          </div>
+          <a class="btn" href="mailto:sales@bring4u.tw?subject=採用応募：ビジネスコーディネーター">応募する</a>
+        </div>
+        <div class="job-card">
+          <div class="job-info">
+            <h3>デジタルマーケティング担当</h3>
+            <p>日本市場向けのSNS・コンテンツ戦略を立案・実行します。</p>
+            <div class="job-tags">
+              <span class="job-tag">正社員</span>
+              <span class="job-tag">リモート可</span>
+              <span class="job-tag">中国語・日本語</span>
+            </div>
+          </div>
+          <a class="btn" href="mailto:sales@bring4u.tw?subject=採用応募：マーケティング担当">応募する</a>
+        </div>
+        <div class="job-card">
+          <div class="job-info">
+            <h3>インターンシップ（随時募集）</h3>
+            <p>日台ビジネスの現場で学びたい学生・第二新卒を歓迎します。</p>
+            <div class="job-tags">
+              <span class="job-tag">インターン</span>
+              <span class="job-tag">週3日〜</span>
+            </div>
+          </div>
+          <a class="btn btn-outline" href="mailto:sales@bring4u.tw?subject=インターン応募">詳細を聞く</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 合作洽談 ── -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-label">Partnership</div>
+      <h2 class="section-title">提携のご相談</h2>
+      <div class="contact-box">
+        <h3>一緒に日台市場を開拓しましょう</h3>
+        <p>
+          日本進出をお考えの台湾企業、または台湾パートナーをお探しの日本企業、<br />
+          どちらも大歓迎です。まずはお気軽にご連絡ください。
+        </p>
+        <div class="contact-actions">
+          <a class="btn" href="mailto:sales@bring4u.tw?subject=提携のご相談">メールで相談する</a>
+          <a class="btn btn-outline" href="#">資料をダウンロード</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo">bring4U</div>
+    <p>© 2026 bring4U Inc. All rights reserved.</p>
+    <p style="margin-top:4px;">Deployed via Vercel · Source on GitHub</p>
+  </footer>
+
 </body>
 </html>
