@@ -55,10 +55,20 @@
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
+      min-height: 78vh;
       display: flex; flex-direction: column; justify-content: flex-end;
       padding: 0 80px 80px;
-      background: linear-gradient(165deg, #ede4d0 0%, #f5efe3 45%, #faf7f2 100%);
+      background:
+        linear-gradient(
+          to bottom,
+          #72b8d8 0%,
+          #9dcce8 12%,
+          #c4dff0 25%,
+          #ddd0b0 50%,
+          #ece0c0 65%,
+          #f0e8d4 80%,
+          #faf7f2 100%
+        );
       position: relative; overflow: hidden;
     }
     .hero-watermark {
@@ -66,7 +76,7 @@
       font-size: clamp(64px, 10vw, 120px);
       font-family: "Georgia", serif;
       font-weight: 700; letter-spacing: 0.02em;
-      color: rgba(42,35,24,0.055);
+      color: rgba(42,35,24,0.035);
       line-height: 1; white-space: nowrap;
       pointer-events: none; user-select: none;
     }
